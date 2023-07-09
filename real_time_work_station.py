@@ -1,5 +1,5 @@
 def real_time_work_station():
-    nowhours = int(input(f'Введите текущее время: часов  '))
+    nowhours = int(input('Введите текущее время: часов  '))
     nowminuts = int(input('Введите текущее время: минут  '))
     nowseconds = int(input('Введите текущее время: секунд  '))
 
