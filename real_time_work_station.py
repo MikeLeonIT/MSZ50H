@@ -3,15 +3,15 @@ def real_time_work_station():
     nowminuts = int(input('Введите текущее время: минут  '))
     nowseconds = int(input('Введите текущее время: секунд  '))
 
-    cickle = float(input('Введите заданный цикл: '))
+    cycle = float(input('Введите заданный цикл: '))
 
     totalproduckt = int(input('Введите желаемое количество готовых упаковок: '))
     totalbuttle = totalproduckt * 248
 
-    totalcickle = totalbuttle // 8
-    totalcickle2 = totalproduckt * 31
+    totalcycle = totalbuttle // 8
+    totalcycle2 = totalproduckt * 31
 
-    totaltimesec = totalcickle * cickle
+    totaltimesec = totalcycle * cycle
 
     totalmaterial = totalproduckt * 8.03
 
@@ -41,7 +41,7 @@ def real_time_work_station():
     print(f'Текущее время: {nowhours} часов {nowminuts} минут {nowseconds} секунд')
     print(f'Ожидаемое количество готовых упаковок: {totalproduckt} упаковок ({totalbuttle} бутылок)')
     print(f'Ожидаемое количество использованного сырья: {totalmaterial} килограмм')
-    print(f'Ожидаемое количество циклов: {totalcickle} (TEST {totalcickle2})')
+    print(f'Ожидаемое количество циклов: {totalcycle} (TEST {totalcycle2})')
     print(f'Ожидаемое количество секунд: {totaltimesec}')
     print(f'Ожидаемое затраченное время: {int(hours)} часов {int(minuts)} минут {seconds} секунд')
     print(f'Время окончания работы: {endhour} часов {endmin} минут {endsec} секунд (+{endday} дней)')
