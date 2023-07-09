@@ -1,47 +1,55 @@
 def real_work_stations():
     """
-    Алгоритм просчёта выработки товара с 2х машин, с расчета начала/конца их работы и заданного цикла на каждой из них
+    Алгоритм просчёта выработки товара с 2х машин, из расчета начала/конца их работы и заданного цикла на каждой из них
     :return:
     """
     # Запрашиваем время начала работы машин
     start_time_hours = int(input('Введите текущее время: Часы:  '))  # Starting Time Hours
     start_time_minutes = int(input('Введите текущее время: Минуты:  '))  # Starting Time Minutes
     start_time_seconds = int(input('Введите текущее время: Секунды:  '))  # Starting Time Seconds
+    
     # Запрашиваем время окончания работы машин
     end_time_hours = int(input('Введите время окончания работы: Часы:  '))  # Ending Time Hours
     end_time_minutes = int(input('Введите время окончания работы: Минуты:  '))  # Ending Time Minutes
     end_time_seconds = int(input('Введите время окончания работы: Секунды:  '))  # Ending Time Seconds
+    
     # Запрашиваем циклы работы машин, для дальнейших подсчётов (за 1 цикл 1 машина изготавливает 8 шт. товара, примерный разброс 22.5 - 38.5 сек.)
     cycle_1 = float(input('Введите цикл первой машины:  '))
     cycle_2 = float(input('Введите цикл второй машины:  '))
-    # Просчитываем общее время работы в секундах (стандартная смена 12 часов с 19.30 до 7.30)
+    
+    # Просчитываем общее время работы в секундах (стандартная смена 12 часов с 19.30 до 7.30, но тоже варьируется)
     end_day_seconds = end_time_hours * 3600 + end_time_minutes * 60 + end_time_seconds  # End Day Time in sec.
     start_day_seconds = 86400 - (start_time_hours * 3600 + start_time_minutes * 60 + start_time_seconds)  # One Day sec.
     total_time_seconds = end_day_seconds + start_day_seconds  # TotalSum StartTime + EndTime
+    
     # Приводим общее время работы машин в секундах в привычный формат
     work_seconds = total_time_seconds
     work_hours = work_seconds // 3600
     work_seconds = work_seconds - (work_hours * 3600)
     work_minutes = work_seconds // 60
     work_seconds = work_seconds - (work_minutes * 60)
-    # Просчитываем в цикле по получившимся общ. секундам каждую машину по отдельности (т.к. цикл у каждой свой)
+    
+    # Просчитываем в цикле(*Py) по получившимся общ. секундам каждую машину по отдельности (т.к. цикл(*работы машины) у каждой свой)
     per_seconds_1 = 0  # it's work 1 Station (Переменная будет накапливать секунды)
-    total_cycle_1 = 0  # it's work 1 Station (Переменная будет накапливать циклы)
+    total_cycle_1 = 0  # it's work 1 Station (Переменная будет накапливать циклы(*работы машины))
+    
     # 'Прогоняем' полностью работу 1ой машины за все отведенное время(по сути виртуальная работа за смену, за доли сек.)
-    for x in range(total_time_seconds):  # it's work 1 Station
+    for _ in range(total_time_seconds):  # it's work 1 Station
         per_seconds_1 += 1  # С каждой итерацией прибавляет переменной секунду
         if per_seconds_1 >= cycle_1:
             per_seconds_1 -= cycle_1
-            total_cycle_1 += 1  # С накоплением секунд, равных или больше циккла, добавляет цикл
+            total_cycle_1 += 1  # С накоплением секунд, равных или больше цикла(*работы машины), добавляет цикл(*работы машины)
 
     per_seconds_2 = 0  # it's work 2 Station
     total_cycle_2 = 0  # it's work 2 Station
+    
     # 'Прогоняем' полностью работу 2ой машины за все отведенное время(по сути виртуальная работа за смену, за доли сек.)
-    for x in range(total_time_seconds):  # it's work 2 Station
+    for _ in range(total_time_seconds):  # it's work 2 Station
         per_seconds_2 += 1
         if per_seconds_2 >= cycle_2:
             per_seconds_2 -= cycle_2
             total_cycle_2 += 1
+            
     # Делаем итоговые вычисления
     total_bottle_1 = total_cycle_1 * 8  # Общее кол-во товара в штуках с 1ой машины
     total_bottle_2 = total_cycle_2 * 8  # Общее кол-во товара в штуках со 2ой машины
@@ -57,6 +65,7 @@ def real_work_stations():
     total_material_station1 = total_package_1 * 8.03  # Выработанное сырьё с 1ой машины
     total_material_station2 = total_package_2 * 8.03  # Выработанное сырьё со 2ой машины
     total_material = total_material_station1 + total_material_station2  # Общее количество выработанного сырья
+    
     # Выводим все нужные результаты на экран
     print(f'\nИтого с 1 машины: {total_bottle_1} шт. товара, {"%.2f" %total_package_1} уп. товара '
           f'(тест{total_package_1_test})'
