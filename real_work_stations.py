@@ -11,14 +11,14 @@ def real_work_stations():
     end_time_hours = int(input('Введите время окончания работы: Часы:  '))  # Ending Time Hours
     end_time_minutes = int(input('Введите время окончания работы: Минуты:  '))  # Ending Time Minutes
     end_time_seconds = int(input('Введите время окончания работы: Секунды:  '))  # Ending Time Seconds
-    # Запрашиваем циклы работы машин, для дальнейших подсчётов (за 1 цикл 1 машина изготавливает 8 шт. товара)
+    # Запрашиваем циклы работы машин, для дальнейших подсчётов (за 1 цикл 1 машина изготавливает 8 шт. товара, примерный разброс 22.5 - 38.5 сек.)
     cycle_1 = float(input('Введите цикл первой машины:  '))
     cycle_2 = float(input('Введите цикл второй машины:  '))
-    # Просчитываем общее время работы в секундах
+    # Просчитываем общее время работы в секундах (стандартная смена 12 часов с 19.30 до 7.30)
     end_day_seconds = end_time_hours * 3600 + end_time_minutes * 60 + end_time_seconds  # End Day Time in sec.
     start_day_seconds = 86400 - (start_time_hours * 3600 + start_time_minutes * 60 + start_time_seconds)  # One Day sec.
     total_time_seconds = end_day_seconds + start_day_seconds  # TotalSum StartTime + EndTime
-    # Приводим общее время в секундах в привычный формат
+    # Приводим общее время работы машин в секундах в привычный формат
     work_seconds = total_time_seconds
     work_hours = work_seconds // 3600
     work_seconds = work_seconds - (work_hours * 3600)
